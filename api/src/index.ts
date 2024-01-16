@@ -6,7 +6,7 @@ import https from 'node:https'
 import mongoose from 'mongoose'
 import app from './server'
 import * as env from './config/env.config'
-import 'source-map-support/register'
+// import 'source-map-support/register'
 
 let server: http.Server | https.Server
 if (env.HTTPS) {

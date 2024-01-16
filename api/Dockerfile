@@ -8,7 +8,7 @@ RUN mkdir -p /var/www/cdn/bookcars/users
 RUN mkdir -p /var/www/cdn/bookcars/temp/users
 RUN mkdir -p /var/www/cdn/bookcars/cars
 RUN mkdir -p /var/www/cdn/bookcars/temp/cars
-RUN npm install --omit=dev
+RUN npm install
 RUN npm install -g typescript
 RUN npm i dotenv
 CMD [ "npm", "start"]

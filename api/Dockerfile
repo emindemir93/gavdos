@@ -1,8 +1,7 @@
-# syntax=docker/dockerfile:1
-
 FROM node:lts-alpine
 WORKDIR /bookcars/api
 COPY ./api ./
+COPY ./api/package.json  ./
 COPY ./packages /bookcars/packages
 RUN mkdir -p /var/www/cdn/bookcars/users
 RUN mkdir -p /var/www/cdn/bookcars/temp/users

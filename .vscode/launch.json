@@ -1,0 +1,57 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+ 
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Api",
+            "skipFiles": ["<node_internals>/**"],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+              "--loader", "ts-node/esm",
+              "--experimental-specifier-resolution=node"
+            ],
+            "args": ["${workspaceFolder}/api/src/index.ts"],
+            "cwd": "${workspaceFolder}/api",
+            "protocol": "inspector",
+            "sourceMaps": true,
+            "internalConsoleOptions": "openOnSessionStart"
+          },
+          {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch User Interface",
+            "url": "http://localhost:3002",
+            "webRoot": "${workspaceFolder}/frontend/src",
+            "sourceMaps": true,
+            "breakOnLoad": true,
+            "sourceMapPathOverrides": {
+              "webpack:///src/*": "${webRoot}/*"
+            }
+          },
+          {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Admin Panel",
+            "url": "http://localhost:3001",
+            "webRoot": "${workspaceFolder}/backend/src",
+            "sourceMaps": true,
+            "breakOnLoad": true,
+            "sourceMapPathOverrides": {
+              "webpack:///src/*": "${webRoot}/*"
+            }
+          },
+    ]
+      
+}

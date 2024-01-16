@@ -11,5 +11,6 @@ RUN mkdir -p /var/www/cdn/bookcars/temp/cars
 RUN npm install --omit=dev
 RUN npm install -g typescript
 RUN npm i dotenv
+RUN npm i source-map-support
 CMD [ "npm", "start"]
 EXPOSE 4002

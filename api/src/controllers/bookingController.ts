@@ -78,19 +78,19 @@ async function notifySupplier(user: env.User, bookingId: string, company: env.Us
   }
 
   // mail
-  // const mailOptions = {
-  //   from: env.SMTP_FROM,
-  //   to: company.email,
-  //   subject: message,
-  //   html: `<p>
-  //   ${strings.HELLO}${company.fullName},<br><br>
-  //   ${message}<br><br>
-  //   ${Helper.joinURL(env.BACKEND_HOST, `booking?b=${bookingId}`)}<br><br>
-  //   ${strings.REGARDS}<br>
-  //   </p>`,
-  // }
+  const mailOptions = {
+    from: env.SMTP_FROM,
+    to: company.email,
+    subject: message,
+    html: `<p>
+    ${strings.HELLO}${company.fullName},<br><br>
+    ${message}<br><br>
+    ${Helper.joinURL(env.BACKEND_HOST, `booking?b=${bookingId}`)}<br><br>
+    ${strings.REGARDS}<br>
+    </p>`,
+  }
 
-  // await MailHelper.sendMail(mailOptions)
+  await MailHelper.sendMail(mailOptions)
 }
 
 /**
@@ -130,18 +130,18 @@ export async function book(req: Request, res: Response) {
 
       strings.setLanguage(user.language)
 
-      // const mailOptions = {
-      //   from: env.SMTP_FROM,s
-      //   to: user.email,
-      //   subject: strings.ACCOUNT_ACTIVATION_SUBJECT,
-      //   html: `<p>
-      //   ${strings.HELLO}${user.fullName},<br><br>
-      //   ${strings.ACCOUNT_ACTIVATION_LINK}<br><br>
-      //   ${Helper.joinURL(env.FRONTEND_HOST, 'activate')}/?u=${encodeURIComponent(user._id.toString())}&e=${encodeURIComponent(user.email)}&t=${encodeURIComponent(token.token)}<br><br>
-      //   ${strings.REGARDS}<br>
-      //   </p>`,
-      // }
-      // await MailHelper.sendMail(mailOptions)
+      const mailOptions = {
+        from: env.SMTP_FROM,
+        to: user.email,
+        subject: strings.ACCOUNT_ACTIVATION_SUBJECT,
+        html: `<p>
+        ${strings.HELLO}${user.fullName},<br><br>
+        ${strings.ACCOUNT_ACTIVATION_LINK}<br><br>
+        ${Helper.joinURL(env.FRONTEND_HOST, 'activate')}/?u=${encodeURIComponent(user._id.toString())}&e=${encodeURIComponent(user.email)}&t=${encodeURIComponent(token.token)}<br><br>
+        ${strings.REGARDS}<br>
+        </p>`,
+      }
+      await MailHelper.sendMail(mailOptions)
 
       body.booking.driver = user._id.toString()
     } else {
@@ -153,9 +153,9 @@ export async function book(req: Request, res: Response) {
       return res.sendStatus(204)
     }
 
-    // let language = env.DEFAULT_LANGUAGE
+    let language = env.DEFAULT_LANGUAGE
     if (user.language) {
-      // language = user.language
+      language = user.language
       strings.setLanguage(user.language)
     }
 
@@ -170,17 +170,17 @@ export async function book(req: Request, res: Response) {
 
     await booking.save()
 
-    // const locale = language === 'fr' ? 'fr-FR' : 'en-US'
-    // const options: Intl.DateTimeFormatOptions = {
-    //   weekday: 'long',
-    //   month: 'long',
-    //   year: 'numeric',
-    //   day: 'numeric',
-    //   hour: 'numeric',
-    //   minute: 'numeric',
-    // }
-    // const from = booking.from.toLocaleString(locale, options)
-    // const to = booking.to.toLocaleString(locale, options)
+    const locale = language === 'fr' ? 'fr-FR' : 'en-US'
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      month: 'long',
+      year: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    }
+    const from = booking.from.toLocaleString(locale, options)
+    const to = booking.to.toLocaleString(locale, options)
     const car = await Car.findById(booking.car).populate<{ company: env.User }>('company')
     if (!car) {
       console.log(`Car ${booking.car} not found`)
@@ -192,34 +192,34 @@ export async function book(req: Request, res: Response) {
       return res.sendStatus(204)
     }
 
-    // const pickupLocationName = pickupLocation.values.filter((value) => value.language === language)[0].value
+    const pickupLocationName = pickupLocation.values.filter((value) => value.language === language)[0].value
     const dropOffLocation = await Location.findById(booking.dropOffLocation).populate<{ values: env.LocationValue[] }>('values')
     if (!dropOffLocation) {
       console.log(`Drop-off location ${booking.pickupLocation} not found`)
       return res.sendStatus(204)
     }
-    // const dropOffLocationName = dropOffLocation.values.filter((value) => value.language === language)[0].value
+    const dropOffLocationName = dropOffLocation.values.filter((value) => value.language === language)[0].value
 
-    // const mailOptions = {
-    //   from: env.SMTP_FROM,
-    //   to: user.email,
-    //   subject: `${strings.BOOKING_CONFIRMED_SUBJECT_PART1} ${booking._id} ${strings.BOOKING_CONFIRMED_SUBJECT_PART2}`,
-    //   html:
-    //     `<p>
-    //     ${strings.HELLO}${user.fullName},<br><br>
-    //     ${!body.payLater ? `${strings.BOOKING_CONFIRMED_PART1} ${booking._id} ${strings.BOOKING_CONFIRMED_PART2}`
-    //       + '<br><br>' : ''}
-    //     ${strings.BOOKING_CONFIRMED_PART3}${car.company.fullName}${strings.BOOKING_CONFIRMED_PART4}${pickupLocationName}${strings.BOOKING_CONFIRMED_PART5}`
-    //     + `${from} ${strings.BOOKING_CONFIRMED_PART6}`
-    //     + `${car.name}${strings.BOOKING_CONFIRMED_PART7}`
-    //     + `<br><br>${strings.BOOKING_CONFIRMED_PART8}<br><br>`
-    //     + `${strings.BOOKING_CONFIRMED_PART9}${car.company.fullName}${strings.BOOKING_CONFIRMED_PART10}${dropOffLocationName}${strings.BOOKING_CONFIRMED_PART11}`
-    //     + `${to} ${strings.BOOKING_CONFIRMED_PART12}`
-    //     + `<br><br>${strings.BOOKING_CONFIRMED_PART13}<br><br>${strings.BOOKING_CONFIRMED_PART14}${env.FRONTEND_HOST}<br><br>
-    //     ${strings.REGARDS}<br>
-    //     </p>`,
-    // }
-    // await MailHelper.sendMail(mailOptions)
+    const mailOptions = {
+      from: env.SMTP_FROM,
+      to: user.email,
+      subject: `${strings.BOOKING_CONFIRMED_SUBJECT_PART1} ${booking._id} ${strings.BOOKING_CONFIRMED_SUBJECT_PART2}`,
+      html:
+        `<p>
+        ${strings.HELLO}${user.fullName},<br><br>
+        ${!body.payLater ? `${strings.BOOKING_CONFIRMED_PART1} ${booking._id} ${strings.BOOKING_CONFIRMED_PART2}`
+          + '<br><br>' : ''}
+        ${strings.BOOKING_CONFIRMED_PART3}${car.company.fullName}${strings.BOOKING_CONFIRMED_PART4}${pickupLocationName}${strings.BOOKING_CONFIRMED_PART5}`
+        + `${from} ${strings.BOOKING_CONFIRMED_PART6}`
+        + `${car.name}${strings.BOOKING_CONFIRMED_PART7}`
+        + `<br><br>${strings.BOOKING_CONFIRMED_PART8}<br><br>`
+        + `${strings.BOOKING_CONFIRMED_PART9}${car.company.fullName}${strings.BOOKING_CONFIRMED_PART10}${dropOffLocationName}${strings.BOOKING_CONFIRMED_PART11}`
+        + `${to} ${strings.BOOKING_CONFIRMED_PART12}`
+        + `<br><br>${strings.BOOKING_CONFIRMED_PART13}<br><br>${strings.BOOKING_CONFIRMED_PART14}${env.FRONTEND_HOST}<br><br>
+        ${strings.REGARDS}<br>
+        </p>`,
+    }
+    await MailHelper.sendMail(mailOptions)
 
     // Notify company
     const company = await User.findById(booking.company)

@@ -8,7 +8,8 @@ COPY ./packages /bookcars/packages
 RUN npm install
 RUN npm run build
 
-FROM nginx:stable-alpine
+FROM nginx:1.20.0-alpine
+# FROM nginx:stable-alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf -- *
 COPY --from=build /bookcars/backend/build .

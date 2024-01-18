@@ -106,7 +106,7 @@ div.home footer div.copyright span.part2 {
     border-radius: 5px;
     height: 52px;
     white-space: nowrap;
-    background: #f37022;
+    background: #05233a;
     color: #fff;
     margin: 10px;
   }
@@ -181,7 +181,7 @@ div.home footer div.copyright span.part2 {
   }
 
   div.home div.home-content span.home-logo-main:after {
-    content: 'BookCars';
+    content: 'Comfort Auto Car';
   }
 
   div.home div.home-content span.home-logo-registered {
@@ -235,7 +235,7 @@ div.home footer div.copyright span.part2 {
     min-width: 100%;
     margin: 0;
     white-space: nowrap;
-    background: #f37022;
+    background: #05233a;
     padding: 5px 32px;
     margin-left: 2px;
   }

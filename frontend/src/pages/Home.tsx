@@ -10,6 +10,8 @@ import LocationSelectList from '../components/LocationSelectList'
 import DateTimePicker from '../components/DateTimePicker'
 
 import SecurePayment from '../assets/img/secure-payment.png'
+import Logo from '../assets/img/logo.png'
+
 import '../assets/css/home.css'
 
 function Home() {
@@ -175,9 +177,9 @@ function Home() {
             <span className="part2">{strings.COPYRIGHT_PART2}</span>
             <span className="part3">{strings.COPYRIGHT_PART3}</span>
           </div>
-          <div className="secure-payment">
+          {/* <div className="secure-payment">
             <img src={SecurePayment} alt="" />
-          </div>
+          </div> */}
         </footer>
       </div>
     </Master>

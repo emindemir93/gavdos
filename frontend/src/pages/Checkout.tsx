@@ -1043,7 +1043,7 @@ function Checkout() {
                   </div>
                 )}
 
-                {car.company.payLater && (
+                {/* {car.company.payLater && (
                   <div className="payment-options-container">
                     <div className="booking-info">
                       <PaymentOptionsIcon />
@@ -1052,7 +1052,7 @@ function Checkout() {
                     <div className="payment-options">
                       <FormControl>
                         <RadioGroup
-                          defaultValue="payOnline"
+                          defaultValue="payLater"
                           onChange={(event) => {
                             setPayLater(event.target.value === 'payLater')
                           }}
@@ -1081,9 +1081,9 @@ function Checkout() {
                       </FormControl>
                     </div>
                   </div>
-                )}
+                )} */}
 
-                {(!car.company.payLater || !payLater) && (
+                {/* {(!car.company.payLater || !payLater) && (
                   <div className="payment">
                     <div className="cost">
                       <div className="secure-payment-label">
@@ -1177,7 +1177,7 @@ function Checkout() {
                       <span>{strings.SECURE_PAYMENT_INFO}</span>
                     </div>
                   </div>
-                )}
+                )} */}
                 <div className="booking-buttons">
                   <Button type="submit" variant="contained" className="btn-book btn-margin-bottom" size="small">
                     {strings.BOOK}

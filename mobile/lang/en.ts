@@ -28,7 +28,7 @@ export const en = {
   CANCEL: 'Cancel',
   CHANGE_PASSWORD: 'Change Password',
   CHANGE_PASSWORD_TITLE: 'Password modification',
-  CURRENCY: 'DH',
+  CURRENCY: '€',
   DELETE_AVATAR_CONFIRM: 'Are you sure you want to delete the picture?',
   UPLOAD_IMAGE: 'Upload image',
   DELETE_IMAGE: 'Delete image',

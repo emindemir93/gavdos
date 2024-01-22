@@ -57,7 +57,7 @@ function Master({
 
     if (currentUser) {
       try {
-        const status = 200// await UserService.validateAccessToken()
+        const status = await UserService.validateAccessToken()
 
         if (status === 200) {
           const _user = await UserService.getUser(currentUser._id)

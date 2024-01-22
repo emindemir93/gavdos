@@ -164,7 +164,7 @@ export const validateAccessToken = (): Promise<number> =>
       { backend: true },
       { withCredentials: true }
     )
-    .then((res) => 200)
+    .then((res) => res.status)
 
 /**
  * Confirm an email.

@@ -10,7 +10,7 @@ import LocationSelectList from '../components/LocationSelectList'
 import DateTimePicker from '../components/DateTimePicker'
 
 import SecurePayment from '../assets/img/secure-payment.png'
-import Logo from '../assets/img/logo.png'
+import Logo from '../assets/img/logo_200.png'
 
 import '../assets/css/home.css'
 
@@ -94,8 +94,10 @@ function Home() {
       <div className="home">
         <div className="home-content">
           <div className="home-logo">
+            <div>
+              <img src={Logo} alt="" />
+            </div>
             <span className="home-logo-main" />
-            <span className="home-logo-registered" />
           </div>
           <div className="home-search">
             <form onSubmit={handleSubmit} className="home-search-form">

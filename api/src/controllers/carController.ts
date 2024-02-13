@@ -7,6 +7,7 @@ import { Request, Response } from 'express'
 import * as bookcarsTypes from 'bookcars-types'
 import Booking from '../models/Booking'
 import Car from '../models/Car'
+import Discount from '../models/Discount'
 import strings from '../config/app.config'
 import * as env from '../config/env.config'
 import * as Helper from '../common/Helper'
@@ -523,6 +524,57 @@ export async function getCars(req: Request, res: Response) {
     return res.json(data)
   } catch (err) {
     console.error(`[car.getCars] ${strings.DB_ERROR} ${req.query.s}`, err)
+    return res.status(400).send(strings.DB_ERROR + err)
+  }
+}
+
+/**
+ * Get Cars.
+ *
+ * @export
+ * @async
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {unknown}
+ */
+export async function getDiscounts(req: Request, res: Response) {
+  try {
+    const data = await Discount.aggregate(
+      [
+        { $match: { } },
+      ],
+      { collation: { locale: env.DEFAULT_LANGUAGE, strength: 2 } },
+    )
+      console.log('data: ', data)
+  // try {
+  //   const { body }: { body: bookcarsTypes.GetDiscount } = req
+  //   const {
+  //     isActive,
+  //   } = body
+
+  //   const $match: mongoose.FilterQuery<any> = {
+  //     $and: [{ type: { $in: isActive } }],
+  //   }
+
+  //   const data = await Discount.aggregate(
+  //     [
+  //       { $match },
+  //     ],
+  //     { collation: { locale: env.DEFAULT_LANGUAGE, strength: 2 } },
+  //   )
+
+  //   if (data.length > 0) {
+  //     for (const car of data[0].resultData) {
+  //       if (car.company) {
+  //         const { _id, fullName, avatar } = car.company
+  //         car.company = { _id, fullName, avatar }
+  //       }
+  //     }
+  //   }
+
+    return res.json(data)
+  } catch (err) {
+    console.error(`[discount.getDiscount] ${strings.DB_ERROR} ${req.query.s}`, err)
     return res.status(400).send(strings.DB_ERROR + err)
   }
 }

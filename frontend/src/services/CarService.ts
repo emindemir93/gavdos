@@ -32,6 +32,18 @@ export const getCar = (id: string): Promise<bookcarsTypes.Car> =>
     .then((res) => res.data)
 
 /**
+ * Get Discounts.
+ *
+ * @returns {Promise<bookcarsTypes.Discount>}
+ */
+export const getDiscounts = (): Promise<bookcarsTypes.Discount> =>
+  axios
+    .get(
+      `${Env.API_HOST}/api/discount`
+    )
+    .then((res) => res.data)
+
+/**
  * Get cars by agency and location.
  *
  * @param {string} keyword

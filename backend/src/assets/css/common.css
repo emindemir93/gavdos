@@ -1,7 +1,7 @@
 .buttons button {
   margin-right: 15px;
   margin-left: 0 !important;
-}
+} 
 
 .btn-primary {
   background-color: #121212 !important;
@@ -12,6 +12,7 @@
 .btn-secondary {
   background-color: #999999 !important;
   color: #ffffff !important;
+
 }
 
 .btn-primary:hover,

@@ -10,5 +10,6 @@ export default {
   getCars: '/api/cars/:page/:size',
   getBookingCars: '/api/booking-cars/:page/:size',
   getFrontendCars: '/api/frontend-cars/:page/:size',
+  getDiscounts: '/api/discount',
   checkCar: '/api/check-car/:id',
 }

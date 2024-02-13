@@ -686,6 +686,7 @@ function Checkout() {
     let _dropOffLocation
     let _from
     let _to
+    let _discounts
 
     const params = new URLSearchParams(window.location.search)
     if (params.has('c')) {
@@ -714,6 +715,12 @@ function Checkout() {
     try {
       _car = await CarService.getCar(carId)
       if (!_car) {
+        setNoMatch(true)
+        return
+      }
+
+      _discounts = await CarService.getDiscounts()
+      if (!_discounts) {
         setNoMatch(true)
         return
       }

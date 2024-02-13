@@ -3,6 +3,7 @@ import process from 'node:process'
 import { Document, Types } from 'mongoose'
 import { CookieOptions } from 'express'
 import * as bookcarsTypes from 'bookcars-types'
+import { Decimal128 } from 'mongodb'
 import * as Helper from '../common/Helper'
 
 dotenv.config({ path: './.env.development' })
@@ -347,6 +348,22 @@ export interface Booking extends Document {
     _additionalDriver?: Types.ObjectId
     cancelRequest?: boolean
     price: number
+}
+
+/**
+ * Booking Document.
+ *
+ * @export
+ * @interface Discount
+ * @typedef {Discount}
+ * @extends {Document}
+ */
+export interface Discount extends Document {
+    _id: Types.ObjectId
+    minDay: number,
+    maxDay: number,
+    factor: Decimal128,
+    isActive: boolean
 }
 
 /**

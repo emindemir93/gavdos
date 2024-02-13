@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, CSSProperties } from 'react'
 import { toast } from 'react-toastify'
 import {
   AppBar,
@@ -13,7 +13,11 @@ import {
   List,
   ListItemButton,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Tabs,
+  Tab,
+  Box,
+  Link
 } from '@mui/material'
 import {
   Menu as MenuIcon,
@@ -39,7 +43,6 @@ import * as NotificationService from '../services/NotificationService'
 import Avatar from './Avatar'
 import * as LangHelper from '../common/LangHelper'
 import * as Helper from '../common/Helper'
-
 import '../assets/css/header.css'
 
 interface HeaderProps {
@@ -69,7 +72,7 @@ function Header({
   const [notificationCount, setNotificationCount] = useState(0)
   const [loading, setIsLoading] = useState(true)
   const [isLoaded, setIsLoaded] = useState(false)
-
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
   const isLangMenuOpen = Boolean(langAnchorEl)
@@ -87,11 +90,31 @@ function Header({
       marginTop: 2,
     },
     grow: {
-      flexGrow: 1,
+      flexGrow: 3,
     },
     menuButton: {
       marginRight: 2,
     },
+    navlinks: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      flex: 'inherit',
+      width: 50
+    },
+    tabTextCss: {
+      fontWeight: '700',
+      fontSize: 'large'
+    }
+  }
+  const classesStyle : { navlinks: CSSProperties } = {
+    navlinks: {
+      display: 'grid',
+      gridTemplateColumns: 'auto auto auto auto auto',
+      gridGap: '20px',
+      width: '75%',
+    },
+
   }
 
   const handleAccountMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -200,7 +223,10 @@ function Header({
       }
     }
   }, [hidden, user])
-
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null)
+  }
+  const pages = ['HOME', 'BOOKINGS', 'ABOUT', 'TOS', 'CONTACT']
   useEffect(() => {
     if (!hidden) {
       if (headerNotificationCount) {
@@ -211,6 +237,11 @@ function Header({
     }
   }, [hidden, headerNotificationCount])
 
+  const [value, setValue] = React.useState('d')
+
+  const handleChange = (event: React.MouseEvent<HTMLElement>) => {
+    setValue(event.currentTarget.id)
+  }
   const menuId = 'primary-account-menu'
   const renderMenu = (
     <Menu
@@ -288,44 +319,38 @@ function Header({
     (!hidden && (
       <div style={classes.grow} className="header">
         <AppBar position="fixed" sx={{ bgcolor: '#f37022' }}>
-          <Toolbar className="toolbar">
-            {isLoaded && !loading && (
-              <IconButton edge="start" sx={classes.menuButton} color="inherit" aria-label="open drawer" onClick={handleSideMenuOpen}>
-                <MenuIcon />
-              </IconButton>
-            )}
-            <Drawer open={isSideMenuOpen} onClose={handleSideMenuClose}>
-              <List sx={classes.list}>
-                <ListItemLink href="/">
-                  <ListItemIcon><HomeIcon /></ListItemIcon>
-                  <ListItemText primary={strings.HOME} />
-                </ListItemLink>
-                {isSignedIn && (
-                  <ListItemLink href="/bookings">
-                    <ListItemIcon><BookingsIcon /></ListItemIcon>
-                    <ListItemText primary={strings.BOOKINGS} />
-                  </ListItemLink>
-                )}
-                <ListItemLink href="/about">
-                  <ListItemIcon><AboutIcon /></ListItemIcon>
-                  <ListItemText primary={strings.ABOUT} />
-                </ListItemLink>
-                <ListItemLink href="/tos">
-                  <ListItemIcon><TosIcon /></ListItemIcon>
-                  <ListItemText primary={strings.TOS} />
-                </ListItemLink>
-                <ListItemLink href="/contact">
-                  <ListItemIcon><MailIcon /></ListItemIcon>
-                  <ListItemText primary={strings.CONTACT} />
-                </ListItemLink>
-                {Env.isMobile() && !hideSignin && !isSignedIn && isLoaded && !loading && (
-                  <ListItemLink href="/sign-in">
-                    <ListItemIcon><LoginIcon /></ListItemIcon>
-                    <ListItemText primary={strings.SIGN_IN} />
-                  </ListItemLink>
-                )}
-              </List>
-            </Drawer>
+          <Toolbar className="toolbar" style={classes.grow}>
+            {/* <Box sx={{ flexGrow: 3, display: { xs: 'none', md: 'flex' } }}>
+              {pages.map((page) => (
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ color: 'white', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              ))}
+            </Box> */}
+            {/* old bar */}
+            <div style={classesStyle.navlinks}>
+              <Button href="/" sx={{ color: 'white', display: 'block' }} onClick={handleChange}>
+                <Typography textAlign="center">{strings.HOME}</Typography>
+              </Button>
+              {isSignedIn && (
+              <Button href="/bookings" sx={{ color: 'white', display: 'block' }} onClick={handleChange}>
+                <Typography textAlign="center">{strings.BOOKINGS}</Typography>
+              </Button>
+              )}
+              <Button href="/about" sx={{ color: 'white', display: 'block' }} onClick={handleChange}>
+                <Typography textAlign="center">{strings.ABOUT}</Typography>
+              </Button>
+              <Button href="/tos" sx={{ color: 'white', display: 'block' }} onClick={handleChange}>
+                <Typography textAlign="center">{strings.TOS}</Typography>
+              </Button>
+              <Button href="/contact" sx={{ color: 'white', display: 'block' }} onClick={handleChange}>
+                <Typography textAlign="center">{strings.CONTACT}</Typography>
+              </Button>
+            </div>
             <div style={classes.grow} />
             <div className="header-desktop">
               {isSignedIn && (

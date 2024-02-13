@@ -1,3 +1,5 @@
+import { Decimal128 } from "mongodb"
+
 export enum UserType {
     Admin = 'admin',
     Company = 'company',
@@ -152,6 +154,10 @@ export interface CreateCarPayload {
 
 export interface UpdateCarPayload extends CreateCarPayload {
     _id: string
+}
+
+export interface GetDiscount {
+    isActive: boolean
 }
 
 export interface GetCarsPayload {
@@ -321,6 +327,14 @@ export interface Car {
     additionalDriver: number
     driverService: number
     [propKey: string]: any
+}
+
+export interface Discount {
+    _id: string,
+    minDay: number,
+    maxDay: number,
+    factor: Decimal128,
+    isActive: boolean
 }
 
 export interface Data<T> {

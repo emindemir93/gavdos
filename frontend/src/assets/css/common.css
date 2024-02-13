@@ -12,6 +12,18 @@
   background-color: #999999 !important;
   color: #ffffff !important;
 }
+.btn-active-tab {
+  border-radius: 12rem;
+  color: #121212 !important;
+  background-color: #FAFAFA !important;
+}
+
+.btn-passive-tab {
+  border-radius: 12rem;
+  background-color: #F37023 !important;
+  color: #05233A !important;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
 
 .btn-primary:hover,
 .btn-secondary:hover,

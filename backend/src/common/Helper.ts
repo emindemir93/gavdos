@@ -250,6 +250,21 @@ export const getAdditionalDriver = (additionalDriver: number, fr: boolean) => {
   }
   return `${strings.ADDITIONAL_DRIVER}${fr ? ' : ' : ': '}${bookcarsHelper.formatNumber(additionalDriver)} ${strings.CAR_CURRENCY}`
 }
+/**
+ * Get perExtraKm  label.
+ *
+ * @param {number} perExtraKm
+ * @param {boolean} fr
+ * @returns {string}
+ */
+export const getPerExtraKm = (perExtraKm: number, fr: boolean) => {
+  if (perExtraKm === -1) {
+    return `${strings.PER_EXTRA_KM}${fr ? ' : ' : ': '}${strings.UNAVAILABLE}`
+  } if (perExtraKm === 0) {
+    return `${strings.PER_EXTRA_KM}${fr ? ' : ' : ': '}${strings.INCLUDED}`
+  }
+  return `${strings.PER_EXTRA_KM}${fr ? ' : ' : ': '}${bookcarsHelper.formatNumber(perExtraKm)} ${strings.CAR_CURRENCY}`
+}
 
 /**
  * Get full insurance label.

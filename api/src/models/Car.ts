@@ -30,11 +30,28 @@ const carSchema = new Schema<env.Car>(
       type: Number,
       required: [true, "can't be blank"],
     },
+    perExtraKm: {
+      type: Number,
+      required: [true, "can't be blank"],
+    },
+    dropOffFee: {
+      type: Number,
+      required: [true, "can't be blank"],
+    },
+    driverService: {
+      type: Number,
+      required: [true, "can't be blank"],
+    },
     deposit: {
       type: Number,
       required: [true, "can't be blank"],
     },
     available: {
+      type: Boolean,
+      required: [true, "can't be blank"],
+      index: true,
+    },
+    availableForDiscount: {
       type: Boolean,
       required: [true, "can't be blank"],
       index: true,

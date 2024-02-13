@@ -79,6 +79,9 @@ const strings = new LocalizedStrings({
   },
   en: {
     GENERIC_ERROR: 'An unhandled error occurred.',
+    PER_EXTRA_KM: 'Per Extra Km',
+    DROP_OFF_FEE: 'Drop Off Fee',
+    DRIVER_SERVICE: 'Driver Service',
     CHANGE_LANGUAGE_ERROR: 'An error occurred while changing language.',
     UPDATED: 'Changes made successfully.',
     GO_TO_HOME: 'Go to the home page',

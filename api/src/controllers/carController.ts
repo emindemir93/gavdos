@@ -98,6 +98,10 @@ export async function update(req: Request, res: Response) {
         collisionDamageWaiver,
         fullInsurance,
         additionalDriver,
+        perExtraKm,
+        driverService,
+        dropOffFee,
+        availableForDiscount,
       } = body
 
       car.company = new mongoose.Types.ObjectId(company)
@@ -105,8 +109,12 @@ export async function update(req: Request, res: Response) {
       car.locations = locations.map((l) => new mongoose.Types.ObjectId(l))
       car.name = name
       car.available = available
+      car.availableForDiscount = availableForDiscount
       car.type = type as bookcarsTypes.CarType
       car.price = price
+      car.perExtraKm = perExtraKm
+      car.driverService = driverService
+      car.dropOffFee = dropOffFee
       car.deposit = deposit
       car.seats = seats
       car.doors = doors

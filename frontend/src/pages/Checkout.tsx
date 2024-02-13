@@ -84,6 +84,7 @@ function Checkout() {
   const [collisionDamageWaiver, setCollisionDamageWaiver] = useState(false)
   const [fullInsurance, setFullInsurance] = useState(false)
   const [additionalDriver, setAdditionalDriver] = useState(false)
+  const [driverService, setDriverService] = useState(false)
   const [cardDateError, setCardDateError] = useState(false)
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -130,7 +131,7 @@ function Checkout() {
         theftProtection,
         collisionDamageWaiver,
         fullInsurance,
-        additionalDriver,
+        additionalDriver
       }
       const _price = Helper.price(car, from, to, options)
 
@@ -148,8 +149,8 @@ function Checkout() {
         theftProtection,
         collisionDamageWaiver,
         fullInsurance,
-        additionalDriver,
-      }
+        additionalDriver
+       }
       const _price = Helper.price(car, from, to, options)
 
       setAmendments(_amendments)
@@ -227,6 +228,26 @@ function Checkout() {
       setAdditionalDriver(_additionalDriver)
       setPrice(_price)
       setAdManuallyChecked(_additionalDriver)
+    }
+  }
+
+  const handleDriverServiceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (car && from && to) {
+      const _driverService = e.target.checked
+      const options: bookcarsTypes.CarOptions = {
+        cancellation,
+        amendments,
+        theftProtection,
+        collisionDamageWaiver,
+        fullInsurance,
+        additionalDriver,
+        driverService: _driverService
+      }
+      const _price = Helper.price(car, from, to, options)
+
+      setDriverService(_driverService)
+      setPrice(_price)
+      setAdManuallyChecked(_driverService)
     }
   }
 
@@ -731,6 +752,7 @@ function Checkout() {
       setCollisionDamageWaiver(included(_car.collisionDamageWaiver))
       setFullInsurance(included(_car.fullInsurance))
       setAdditionalDriver(included(_car.additionalDriver))
+      setDriverService(included(_car.driverService))
       setVisible(true)
     } catch (err) {
       Helper.error(err)
@@ -838,6 +860,18 @@ function Checkout() {
                         )}
                       />
                     </FormControl>
+                    <FormControl fullWidth margin="dense">
+                      <FormControlLabel
+                        disabled={car.driverService === -1 || car.driverService === 0}
+                        control={<Switch checked={driverService} onChange={handleDriverServiceChange} color="primary" />}
+                        label={(
+                          <span>
+                            <span className="booking-option-label">{csStrings.DRIVER_SERVICE}</span>
+                            <span className="booking-option-value">{Helper.getAdditionalDriverOption(car.driverService, days)}</span>
+                          </span>
+                        )}
+                      />
+                    </FormControl>
                   </div>
                 </div>
 
@@ -875,6 +909,14 @@ function Checkout() {
                           <span className="car-company-name">{car.company.fullName}</span>
                         </div>
                       </div>
+                    </div>
+                    <div className="booking-detail" style={{ height: bookingDetailHeight }}>
+                      <span className="booking-detail-title">{strings.PER_EXTRA_KM}</span>
+                      <div className="booking-detail-value">{`${car.perExtraKm} ${(commonStrings.CURRENCY)} ${'/KM'}`}</div>
+                    </div>
+                    <div className="booking-detail" style={{ height: bookingDetailHeight }}>
+                      <span className="booking-detail-title">{strings.DROP_OFF_FEE}</span>
+                      <div className="booking-detail-value">{`${car.dropOffFee} ${(commonStrings.CURRENCY)} ${'/KM'}`}</div>
                     </div>
                     <div className="booking-detail" style={{ height: bookingDetailHeight }}>
                       <span className="booking-detail-title">{strings.COST}</span>

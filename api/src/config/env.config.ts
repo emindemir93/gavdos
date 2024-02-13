@@ -363,8 +363,12 @@ export interface Car extends Document {
     minimumAge: number
     locations: Types.ObjectId[]
     price: number
+    perExtraKm: number
+    dropOffFee: number
+    driverService: number
     deposit: number
     available: boolean
+    availableForDiscount: boolean
     type: bookcarsTypes.CarType
     gearbox: bookcarsTypes.GearboxType
     aircon: boolean

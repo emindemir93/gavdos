@@ -49,9 +49,13 @@ function UpdateCar() {
   const [company, setCompany] = useState<bookcarsTypes.Option>()
   const [locations, setLocations] = useState<bookcarsTypes.Option[]>([])
   const [available, setAvailable] = useState(false)
+  const [availableForDiscount, setAvailableForDiscount] = useState(false)
   const [type, setType] = useState('')
   const [gearbox, setGearbox] = useState('')
   const [price, setPrice] = useState('')
+  const [perExtraKm, setPerExtraKm] = useState('')
+  const [driverService, setDriverService] = useState('')
+  const [dropOffFee, setDropOffFee] = useState('')
   const [seats, setSeats] = useState('')
   const [doors, setDoors] = useState('')
   const [aircon, setAircon] = useState(false)
@@ -136,6 +140,10 @@ function UpdateCar() {
     setAvailable(e.target.checked)
   }
 
+  const handeleAvailableForDiscount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAvailableForDiscount(e.target.checked)
+  }
+
   const handleCarTypeChange = (value: string) => {
     setType(value)
   }
@@ -150,6 +158,18 @@ function UpdateCar() {
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(e.target.value)
+  }
+
+  const handleDropOffFeeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDropOffFee(e.target.value)
+  }
+
+  const handlePerExtraKmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPerExtraKm(e.target.value)
+  }
+
+  const handlesetDriverService = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDriverService(e.target.value)
   }
 
   const handleDepositChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -222,8 +242,10 @@ function UpdateCar() {
         minimumAge: Number.parseInt(minimumAge, 10),
         locations: locations.map((l) => l._id),
         price: Number(price),
+        perExtraKm: Number(perExtraKm),
         deposit: Number(deposit),
         available,
+        availableForDiscount,
         type,
         gearbox,
         aircon,
@@ -238,6 +260,8 @@ function UpdateCar() {
         collisionDamageWaiver: extraToNumber(collisionDamageWaiver),
         fullInsurance: extraToNumber(fullInsurance),
         additionalDriver: extraToNumber(additionalDriver),
+        driverService: extraToNumber(driverService),
+        dropOffFee: extraToNumber(dropOffFee)
       }
 
       const status = await CarService.update(data)
@@ -262,7 +286,6 @@ function UpdateCar() {
         if (id && id !== '') {
           try {
             const _car = await CarService.getCar(id)
-
             if (_car) {
               if (_user.type === bookcarsTypes.RecordType.Company && _user._id !== _car.company._id) {
                 setLoading(false)
@@ -289,8 +312,12 @@ function UpdateCar() {
               }
               setLocations(lcs)
               setPrice(_car.price.toString())
+              setPerExtraKm(_car.perExtraKm.toString())
+              setDriverService(_car.driverService.toString())
+              setDropOffFee(_car.dropOffFee.toString())
               setDeposit(_car.deposit.toString())
               setAvailable(_car.available)
+              setAvailableForDiscount(_car.availableForDiscount)
               setType(_car.type)
               setGearbox(_car.gearbox)
               setAircon(_car.aircon)
@@ -304,6 +331,7 @@ function UpdateCar() {
               setCollisionDamageWaiver(extraToString(_car.collisionDamageWaiver))
               setFullInsurance(extraToString(_car.fullInsurance))
               setAdditionalDriver(extraToString(_car.additionalDriver))
+
               setVisible(true)
               setLoading(false)
             } else {
@@ -407,6 +435,37 @@ function UpdateCar() {
 
               <FormControl fullWidth margin="dense">
                 <TextField
+                  label={`${strings.PER_EXTRA_KM} (${csStrings.KM_CURRENCY})`}
+                  // eslint-disable-next-line
+                  inputProps={{
+                    inputMode: 'numeric',
+                    pattern: '^\\d+(.\\d+)?$',
+                  }}
+                  onChange={handlePerExtraKmChange}
+                  required
+                  variant="standard"
+                  autoComplete="off"
+                  value={perExtraKm}
+                />
+              </FormControl>
+              <FormControl fullWidth margin="dense">
+                <TextField
+                  label={`${strings.DROP_OFF_FEE} (${csStrings.KM_CURRENCY})`}
+                  // eslint-disable-next-line
+                  inputProps={{
+                    inputMode: 'numeric',
+                    pattern: '^\\d+(.\\d+)?$',
+                  }}
+                  onChange={handleDropOffFeeChange}
+                  required
+                  variant="standard"
+                  autoComplete="off"
+                  value={dropOffFee}
+                />
+              </FormControl>
+
+              <FormControl fullWidth margin="dense">
+                <TextField
                   label={`${csStrings.DEPOSIT} (${commonStrings.CURRENCY})`}
                   // eslint-disable-next-line
                   inputProps={{
@@ -423,6 +482,7 @@ function UpdateCar() {
 
               <FormControl fullWidth margin="dense" className="checkbox-fc">
                 <FormControlLabel control={<Switch checked={available} onChange={handleAvailableChange} color="primary" />} label={strings.AVAILABLE} className="checkbox-fcl" />
+                <FormControlLabel control={<Switch checked={availableForDiscount} onChange={handeleAvailableForDiscount} color="primary" />} label={strings.AVAILABLE_FOR_DISCOUNT} className="checkbox-fcl" />
               </FormControl>
 
               <FormControl fullWidth margin="dense">
@@ -558,6 +618,22 @@ function UpdateCar() {
                   variant="standard"
                   autoComplete="off"
                   value={additionalDriver}
+                />
+              </FormControl>
+
+              <FormControl fullWidth margin="dense">
+                <TextField
+                  label={`${strings.DRIVER_SERVICE} (${csStrings.CAR_CURRENCY})`}
+                  // eslint-disable-next-line
+                  inputProps={{
+                    inputMode: 'numeric',
+                    pattern: '^\\d+(.\\d+)?$',
+                  }}
+                  onChange={handlesetDriverService}
+                  required
+                  variant="standard"
+                  autoComplete="off"
+                  value={driverService}
                 />
               </FormControl>
 

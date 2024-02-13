@@ -513,6 +513,30 @@ function CarList({
                           </div>
                         </Tooltip>
                       </li>
+                      <li>
+                        <Tooltip title={booking ? '' : commonStrings.PER_EXTRA_KM} placement="left">
+                          <div className="car-info-list-item">
+                            <InfoIcon className="extra-info" />
+                            <span className="car-info-list-text">{`${commonStrings.PER_EXTRA_KM} ${car.perExtraKm} ${(commonStrings.CURRENCY)} ${'/KM'}`}</span>
+                          </div>
+                        </Tooltip>
+                      </li>
+                      <li>
+                        <Tooltip title={booking ? '' : commonStrings.DRIVER_SERVICE} placement="left">
+                          <div className="car-info-list-item">
+                            <InfoIcon className="extra-info" />
+                            <span className="car-info-list-text">{`${commonStrings.DRIVER_SERVICE} ${car.driverService} ${(strings.CAR_CURRENCY)}`}</span>
+                          </div>
+                        </Tooltip>
+                      </li>
+                      <li>
+                        <Tooltip title={booking ? '' : commonStrings.DROP_OFF_FEE} placement="left">
+                          <div className="car-info-list-item">
+                            <InfoIcon className="extra-info" />
+                            <span className="car-info-list-text">{`${commonStrings.DROP_OFF_FEE} ${car.dropOffFee} ${(commonStrings.CURRENCY)} ${'/KM'}`}</span>
+                          </div>
+                        </Tooltip>
+                      </li>
                     </ul>
                   </div>
                   {!hidePrice && <div className="price">{`${bookcarsHelper.formatNumber(car.price)} ${strings.CAR_CURRENCY}`}</div>}

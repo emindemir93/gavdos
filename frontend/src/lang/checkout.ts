@@ -67,6 +67,9 @@ const strings = new LocalizedStrings({
     PAY_LATER_INFO: 'Free amendments and cancellation',
     PAY_ONLINE: 'Pay online',
     PAY_ONLINE_INFO: 'Amendments and cancellation under conditions',
+    PER_EXTRA_KM: 'Per Extra Km',
+    DROP_OFF_FEE: 'Drop Off Fee',
+    DRIVER_SERVICE: 'Driver Service',
   },
 })
 

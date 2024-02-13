@@ -65,6 +65,9 @@ const strings = new LocalizedStrings({
   },
   en: {
     NEW_CAR: 'New car',
+    PER_EXTRA_KM: 'Per Extra Km',
+    DROP_OFF_FEE: 'Drop Off Fee',
+    DRIVER_SERVICE: 'Driver Service',
     DELETE_CAR: 'Are you sure you want to delete this car?',
     CAR_CURRENCY: ` ${commonStrings.CURRENCY}/day`,
     FUEL_POLICY: 'Fuel policy',

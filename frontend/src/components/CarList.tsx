@@ -378,6 +378,22 @@ function CarList({
                       </div>
                     </Tooltip>
                   </li>
+                  <li>
+                    <Tooltip title={booking ? '' : commonStrings.PER_EXTRA_KM} placement="left">
+                      <div className="car-info-list-item">
+                        <InfoIcon className="extra-info" />
+                        <span className="car-info-list-text">{Helper.getPerExtraKm(car.perExtraKm, fr)}</span>
+                      </div>
+                    </Tooltip>
+                  </li>
+                  <li>
+                    <Tooltip title={booking ? '' : commonStrings.DRIVER_SERVICE} placement="left">
+                      <div className="car-info-list-item">
+                        <InfoIcon className="extra-info" />
+                        <span className="car-info-list-text">{Helper.getPerExtraKm(car.driverService, fr)}</span>
+                      </div>
+                    </Tooltip>
+                  </li>
                 </ul>
               </div>
 

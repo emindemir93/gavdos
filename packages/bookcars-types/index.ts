@@ -128,8 +128,11 @@ export interface CreateCarPayload {
     minimumAge: number
     locations: string[]
     price: number
+    perExtraKm: number
+    dropOffFee: number
     deposit: number
     available: boolean
+    availableForDiscount :boolean
     type: string
     gearbox: string
     aircon: boolean
@@ -144,6 +147,7 @@ export interface CreateCarPayload {
     collisionDamageWaiver: number
     fullInsurance: number
     additionalDriver: number
+    driverService: number
 }
 
 export interface UpdateCarPayload extends CreateCarPayload {
@@ -297,6 +301,8 @@ export interface Car {
     minimumAge: number
     locations: Location[]
     price: number
+    perExtraKm: number
+    dropOffFee: number
     deposit: number
     available: boolean
     type: CarType
@@ -313,6 +319,7 @@ export interface Car {
     collisionDamageWaiver: number
     fullInsurance: number
     additionalDriver: number
+    driverService: number
     [propKey: string]: any
 }
 
@@ -381,4 +388,5 @@ export interface CarOptions {
     collisionDamageWaiver?: boolean
     fullInsurance?: boolean
     additionalDriver?: boolean
+    driverService?: boolean
 }

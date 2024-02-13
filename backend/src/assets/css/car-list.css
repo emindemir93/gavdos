@@ -206,7 +206,7 @@ section.car-list .empty-list {
     color: #333;
     font-size: 12px;
     margin-bottom: 10px;
-    height: 430px;
+    height: 600px;
     width: 800px;
     margin-left: calc(50% - 400px);
   }

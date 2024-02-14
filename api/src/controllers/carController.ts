@@ -527,6 +527,52 @@ export async function getCars(req: Request, res: Response) {
     return res.status(400).send(strings.DB_ERROR + err)
   }
 }
+/**
+ * Create a Discount.
+ *
+ * @export
+ * @async
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {unknown}
+ */
+export async function createDiscount(req: Request, res: Response) {
+  const { body }: { body: bookcarsTypes.CreateDiscountPayload } = req
+
+  try {
+    const discount = new Discount(body)
+    await discount.save()
+    return res.json(discount)
+  } catch (err) {
+    console.error(`[car.create] ${strings.DB_ERROR} ${body}`, err)
+    return res.status(400).send(strings.ERROR + err)
+  }
+}
+/**
+ * Delete Discount by ID.
+ *
+ * @export
+ * @async
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {unknown}
+ */
+export async function deleteDiscount(req: Request, res: Response) {
+  const { id } = req.params
+
+  try {
+    const discount = await Discount.findById(id)
+    if (discount) {
+      await Discount.deleteOne({ _id: id })
+    } else {
+      return res.sendStatus(404)
+    }
+    return res.sendStatus(200)
+  } catch (err) {
+    console.error(`[discount.delete] ${strings.DB_ERROR} ${id}`, err)
+    return res.status(400).send(strings.DB_ERROR + err)
+  }
+}
 
 /**
  * Get Cars.

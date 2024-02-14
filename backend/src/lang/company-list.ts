@@ -9,8 +9,10 @@ const strings = new LocalizedStrings({
   },
   en: {
     EMPTY_LIST: 'No suppliers.',
+    EMPTY_DISCOUNT_LIST: 'No Discounts',
     VIEW_COMPANY: 'View supplier profile',
     DELETE_COMPANY: 'Are you sure you want to delete this supplier and all its data?',
+    DELETE_DISCOUNT: 'Are you sure you want to delete this discount and all its data?',
   },
 })
 

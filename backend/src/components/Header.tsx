@@ -18,6 +18,7 @@ import {
 import {
   Menu as MenuIcon,
   Mail as MailIcon,
+  Discount,
   Notifications as NotificationsIcon,
   More as MoreIcon,
   Language as LanguageIcon,
@@ -308,6 +309,10 @@ function Header({
                 <ListItemLink href="/cars">
                   <ListItemIcon><CarsIcon /></ListItemIcon>
                   <ListItemText primary={strings.CARS} />
+                </ListItemLink>
+                <ListItemLink href="/discount">
+                  <ListItemIcon><Discount /></ListItemIcon>
+                  <ListItemText primary={strings.DISCOUNT_PARAMETERS} />
                 </ListItemLink>
                 <ListItemLink href="/users">
                   <ListItemIcon><UsersIcon /></ListItemIcon>

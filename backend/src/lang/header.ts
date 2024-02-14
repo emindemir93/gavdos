@@ -26,6 +26,7 @@ const strings = new LocalizedStrings({
     ABOUT: 'About',
     TOS: 'Terms of Service',
     CONTACT: 'Contact',
+    DISCOUNT_PARAMETERS: 'Discount Parameters',
     LANGUAGE: 'Language',
     SETTINGS: 'Settings',
     SIGN_OUT: 'Sign out',

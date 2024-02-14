@@ -156,6 +156,13 @@ export interface UpdateCarPayload extends CreateCarPayload {
     _id: string
 }
 
+export interface CreateDiscountPayload {
+    minDay: number
+    maxDay: number
+    factor: Decimal128
+    isActive: boolean
+}
+
 export interface GetDiscount {
     isActive: boolean
 }

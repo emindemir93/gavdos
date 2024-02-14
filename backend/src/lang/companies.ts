@@ -9,8 +9,13 @@ const strings = new LocalizedStrings({
   },
   en: {
     NEW_COMPANY: 'New supplier',
+    NEW_DISCOUNT: 'New Discount',
+
     COMPANY: 'supplier',
+    DISCOUNT: 'discount',
     COMPANIES: 'suppliers',
+    DISCOUNTS: 'discounts',
+
   },
 })
 

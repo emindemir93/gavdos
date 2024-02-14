@@ -122,6 +122,35 @@ export const deleteImage = (id: string): Promise<number> =>
     .then((res) => res.status)
 
 /**
+ * Create a Discount.
+ *
+ * @param {bookcarsTypes.CreateDiscountPayload} data
+ * @returns {Promise<bookcarsTypes.Discount>}
+ */
+export const createDiscount = (data: bookcarsTypes.CreateDiscountPayload): Promise<bookcarsTypes.Discount> =>
+axios
+  .post(
+    `${Env.API_HOST}/api/create-discount`,
+    data,
+    { withCredentials: true }
+  )
+  .then((res) => res.data)
+
+ /**
+ * Delete a Discount.
+ *
+ * @param {string} id
+ * @returns {Promise<number>}
+ */
+export const deleteDiscount = (id: string): Promise<number> =>
+axios
+  .delete(
+    `${Env.API_HOST}/api/delete-discount/${encodeURIComponent(id)}`,
+    { withCredentials: true }
+  )
+  .then((res) => res.status)
+
+/**
  * Delete a temporary Car image.
  *
  * @param {string} image
@@ -185,3 +214,15 @@ export const getBookingCars = (keyword: string, data: bookcarsTypes.GetBookingCa
       { withCredentials: true }
     )
     .then((res) => res.data)
+
+/**
+ * Get Discounts.
+ *
+ * @returns {Promise<bookcarsTypes.Discount[]>}
+ */
+export const getDiscounts = (): Promise<bookcarsTypes.Discount[]> =>
+axios
+  .get(
+    `${Env.API_HOST}/api/discount`
+  )
+  .then((res) => res.data)

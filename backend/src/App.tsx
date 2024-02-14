@@ -30,6 +30,8 @@ const ToS = lazy(() => import('./pages/ToS'))
 const About = lazy(() => import('./pages/About'))
 const ChangePassword = lazy(() => import('./pages/ChangePassword'))
 const Contact = lazy(() => import('./pages/Contact'))
+const Discount = lazy(() => import('./pages/Discount'))
+const CreateDiscount = lazy(() => import('./pages/CreateDiscount'))
 const NoMatch = lazy(() => import('./pages/NoMatch'))
 
 function App() {
@@ -67,7 +69,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/tos" element={<ToS />} />
             <Route path="/contact" element={<Contact />} />
-
+            <Route path="/discount" element={<Discount />} />
+            <Route path="/createDiscount" element={<CreateDiscount />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </Suspense>

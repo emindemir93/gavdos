@@ -266,6 +266,22 @@ export const getPerExtraKm = (perExtraKm: number, fr: boolean) => {
 }
 
 /**
+ * Get getDriveService  label.
+ *
+ * @param {number} driverService
+ * @param {boolean} fr
+ * @returns {string}
+ */
+export const getDriveServcie = (driverService: number, fr: boolean) => {
+  if (driverService === -1) {
+    return `${strings.DRIVER_SERVICE}${fr ? ' : ' : ': '}${strings.UNAVAILABLE}`
+  } if (driverService === 0) {
+    return `${strings.DRIVER_SERVICE}${fr ? ' : ' : ': '}${strings.INCLUDED}`
+  }
+  return `${strings.DRIVER_SERVICE}${fr ? ' : ' : ': '}${bookcarsHelper.formatNumber(driverService)} ${strings.CAR_CURRENCY}`
+}
+
+/**
  * Get full insurance label.
  *
  * @param {number} fullInsurance

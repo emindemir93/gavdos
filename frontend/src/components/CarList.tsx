@@ -390,7 +390,7 @@ function CarList({
                     <Tooltip title={booking ? '' : commonStrings.DRIVER_SERVICE} placement="left">
                       <div className="car-info-list-item">
                         <InfoIcon className="extra-info" />
-                        <span className="car-info-list-text">{Helper.getPerExtraKm(car.driverService, fr)}</span>
+                        <span className="car-info-list-text">{Helper.getDriveServcie(car.driverService, fr)}</span>
                       </div>
                     </Tooltip>
                   </li>

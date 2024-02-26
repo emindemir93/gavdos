@@ -4,6 +4,10 @@ FROM node:lts-alpine
 WORKDIR /bookcars/api
 COPY ./api ./
 COPY ./packages /bookcars/packages
+WORKDIR /bookcars/packages
+RUN npm install
+RUN npm run build
+WORKDIR /bookcars/api
 RUN mkdir -p /bookcarsdoc/bookcars/users
 RUN mkdir -p /bookcarsdoc/bookcars/temp/users
 RUN mkdir -p /bookcarsdoc/bookcars/cars

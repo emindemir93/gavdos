@@ -9,6 +9,5 @@ RUN mkdir -p /bookcarsdoc/bookcars/temp/users
 RUN mkdir -p /bookcarsdoc/bookcars/cars
 RUN mkdir -p /bookcarsdoc/bookcars/temp/cars
 RUN npm install
-RUN npm install mongodb @types/mongodb
 CMD [ "npm", "start"]
 EXPOSE 4002

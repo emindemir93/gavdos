@@ -4,7 +4,7 @@ FROM node:lts-alpine
 WORKDIR /bookcars/api
 COPY ./api ./
 COPY ./packages /bookcars/packages
-WORKDIR /bookcars/packages
+WORKDIR /bookcars/packages/bookcars-types
 RUN npm install
 RUN npm run build
 WORKDIR /bookcars/api

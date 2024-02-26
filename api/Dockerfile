@@ -8,6 +8,7 @@ RUN mkdir -p /bookcarsdoc/bookcars/users
 RUN mkdir -p /bookcarsdoc/bookcars/temp/users
 RUN mkdir -p /bookcarsdoc/bookcars/cars
 RUN mkdir -p /bookcarsdoc/bookcars/temp/cars
-RUN npm install --omit=dev
+RUN npm install mongodb
+RUN npm install
 CMD [ "npm", "start"]
 EXPOSE 4002

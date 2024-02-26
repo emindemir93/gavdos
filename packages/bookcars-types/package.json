@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/mongodb": "^4.0.7",
+    "mongodb": "^6.3.0",
     "rimraf": "^5.0.1",
     "typescript": "^5.2.2"
   }
